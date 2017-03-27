@@ -3,11 +3,6 @@ import moduleForAcceptance from 'acceptance-testing-training/tests/helpers/modul
 
 moduleForAcceptance('Acceptance | card view');
 
-// a "triple A" test:
-// Assembles | state
-// Acts on   | state
-// Asserts   | state
-
 test('Should be able to view card', function(assert) {
   // assemble
   const list = server.create('list', { name: 'todo' });
@@ -53,6 +48,18 @@ test('Should be able to edit card', function(assert) {
   andThen(() => {
     const actual = find('h1').text().trim();
     const expected = 'New title';
+    assert.equal(actual, expected);
+  });
+});
+
+test('Should see \'Something broke.\' when the API 404s', function(assert) {
+  server.get('/lists', {}, 404);
+
+  visit('/');
+
+  andThen(() => {
+    const actual = find('h1').text().trim();
+    const expected = 'Something broke.';
     assert.equal(actual, expected);
   });
 });
