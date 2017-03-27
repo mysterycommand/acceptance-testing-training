@@ -1,4 +1,4 @@
-import { Response } from 'ember-cli-mirage';
+// import { Response } from 'ember-cli-mirage';
 
 export default function() {
   this.namespace = '/api';
@@ -7,7 +7,7 @@ export default function() {
   this.resource('cards');
   this.resource('users');
 
-  this.get('/lists', function(schema/*, request*/) {
-    return new Response(404);
-  })
+  // this.get('/lists', function(/*schema, request*/) {
+  //   return new Response(404);
+  // });
 }

@@ -1,4 +1,6 @@
 import { test } from 'qunit';
+import testSelector from 'ember-test-selectors';
+import cardPage from '../pages/card';
 import moduleForAcceptance from 'acceptance-testing-training/tests/helpers/module-for-acceptance';
 
 moduleForAcceptance('Acceptance | card view');
@@ -17,7 +19,7 @@ test('Should be able to view card', function(assert) {
 
   // assert
   andThen(() => {
-    const actual = find('h1').text().trim();
+    const actual = find(testSelector('title')).text().trim();
     const expected = 'My first card';
     assert.equal(actual, expected);
   });
@@ -40,26 +42,32 @@ test('Should be able to view the card description', function(assert) {
 test('Should be able to edit card', function(assert) {
   server.create('card');
 
-  visit('/cards/1');
-  click('.Big-card__edit-link');
-  fillIn('.Edit-card__title', 'New title');
-  click('.Edit-card__save-button');
+  cardPage
+    .visit()
+    .clickEdit()
+    .changeTitle('New title')
+    .clickSave();
+
+  // visit('/cards/1');
+  // click('.Big-card__edit-link');
+  // fillIn('.Edit-card__title', 'New title');
+  // click('.Edit-card__save-button');
 
   andThen(() => {
-    const actual = find('h1').text().trim();
+    const actual = find(testSelector('title')).text().trim();
     const expected = 'New title';
     assert.equal(actual, expected);
   });
 });
 
-test('Should see \'Something broke.\' when the API 404s', function(assert) {
-  server.get('/lists', {}, 404);
+// test('Should see \'Something broke.\' when the API 404s', function(assert) {
+//   server.get('/lists', {}, 404);
 
-  visit('/');
+//   visit('/');
 
-  andThen(() => {
-    const actual = find('h1').text().trim();
-    const expected = 'Something broke.';
-    assert.equal(actual, expected);
-  });
-});
+//   andThen(() => {
+//     const actual = find('h1').text().trim();
+//     const expected = 'Something broke.';
+//     assert.equal(actual, expected);
+//   });
+// });

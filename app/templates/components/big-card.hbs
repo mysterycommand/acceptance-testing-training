@@ -8,10 +8,12 @@
         after-save=(action "toggleEdit")
         cancel=(action "toggleEdit")}}
     {{else}}
-      <h1 class="Big-card__title
-                 lh-title f3 pa0 ma0 mb2">
+      <h2 data-test-title
+        class="Big-card__title
+               lh-title f3 pa0 ma0 mb2
+               bg-yellow">
         {{card.title}}
-      </h1>
+      </h2>
       <p class="Big-card__description
         f5 measure lh-copy mb3">
         {{card.description}}
