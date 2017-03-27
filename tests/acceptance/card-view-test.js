@@ -12,3 +12,11 @@ test('Should be able to view card', function(assert) {
     assert.equal(actual, expected);
   });
 });
+
+test('Should be able to edit card', function(assert) {
+  visit('/cards/1');
+  // a "triple A" test:
+  // Assembles | state
+  // Acts on   | state
+  // Asserts   | state
+});
